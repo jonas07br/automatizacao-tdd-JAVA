@@ -1,6 +1,7 @@
 package jonasRafaelSilvaCavalcanti.model;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import jonasRafaelSilvaCavalcanti.enums.StatusAprovacao;
 
@@ -65,8 +66,52 @@ public class Matricula {
 	}
 
 	public void consolidarParcialmente() {
-		// TODO Implementar aqui a lógica de consolidação parcial
-		this.setStatus(StatusAprovacao.APR);
+
+		BigDecimal quantidaDeNotas = new BigDecimal(3);
+		BigDecimal notaMinima = new BigDecimal(4);
+
+		//Indica se possui media maior ou igual a 6
+		boolean acimaDaMedia;
+
+		//Indica se possui media para reposicao(>=3 e <6)
+		boolean possuiMediaParaReposicao;
+
+		//Indica de possui todas as notas maiores que 4
+		boolean possuiNotasMinimas;
+
+		//Indica se possui frequencia maior que 75
+		boolean possuiFrequenciaMinima;
+
+
+		BigDecimal media = (this.nota1
+				.add(this.nota2)
+				.add(this.nota3))
+				.divide(quantidaDeNotas,RoundingMode.HALF_UP);
+
+		acimaDaMedia = media.compareTo(new BigDecimal(6)) >= 0;
+
+		possuiMediaParaReposicao = media.compareTo(new BigDecimal(6)) < 0 && media.compareTo(new BigDecimal(3)) >= 0;
+
+		possuiNotasMinimas = this.nota1.compareTo(notaMinima)>=0 &&
+				this.nota2.compareTo(notaMinima)>=0 &&
+				this.nota3.compareTo(notaMinima)>=0;
+
+		possuiFrequenciaMinima = this.getFrequencia()>75;
+
+		//Filtro para atribuicao de Status
+		if(acimaDaMedia && possuiNotasMinimas && possuiFrequenciaMinima) {
+			this.setStatus(StatusAprovacao.APR);
+		}else if(possuiFrequenciaMinima && possuiMediaParaReposicao) {
+			this.setStatus(StatusAprovacao.REC);
+		}else if(!(acimaDaMedia || possuiMediaParaReposicao)){
+			if(possuiFrequenciaMinima){
+				this.setStatus(StatusAprovacao.REP);
+			}else{
+				this.setStatus(StatusAprovacao.REPMF);
+			}
+		}else{
+			this.setStatus(StatusAprovacao.REPF);
+		}
 	}
 
 	public StatusAprovacao getStatus() {
