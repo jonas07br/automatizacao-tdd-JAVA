@@ -35,9 +35,10 @@ class MatriculaTest {
 
     @ParameterizedTest
     @CsvSource(value = {
-            "6.0f,6.0f,6.0f,100,APR",//APROVADO
-            "5.9f,5.9f,5.9f,100,REC",//REPOSICAO
-            "2.9f,2.9f,2.9f,100,REP",//REPROVADO POR MEDIA
+            "6.0f,6.0f,6.0f,75,APR",//APROVADO
+            "5.9f,5.9f,5.9f,75,REC",//REPOSICAO
+            "1.0f,10.0f,10.0f,75,REC",//REPOSICAO POR NOTA MINIMA
+            "2.9f,2.9f,2.9f,75,REP",//REPROVADO POR MEDIA
             "10.0f,10.0f,10.0f,74,REPF",//REPROVADO POR FALTA
             "2.9f,2.9f,2.9f,74,REPMF",//REPROVADO POR MEDIA E FALTA
     })
