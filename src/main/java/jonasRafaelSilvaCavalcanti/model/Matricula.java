@@ -30,6 +30,7 @@ public class Matricula {
 	}
 
 	public void cadastrarNota1(BigDecimal nota1) {
+		checarNota(nota1);
 		this.nota1 = nota1;
 	}
 
@@ -38,6 +39,7 @@ public class Matricula {
 	}
 
 	public void cadastrarNota2(BigDecimal nota2) {
+		checarNota(nota2);
 		this.nota2 = nota2;
 	}
 
@@ -46,6 +48,7 @@ public class Matricula {
 	}
 
 	public void cadastrarNota3(BigDecimal nota3) {
+		checarNota(nota3);
 		this.nota3 = nota3;
 	}
 
@@ -65,6 +68,11 @@ public class Matricula {
 		return turma;
 	}
 
+
+	/**
+	 *  Calcula média do aluno, checa frequencia e notas minimas.
+	 *  Atribui Status de consolidação ao aluno.
+	 */
 	public void consolidarParcialmente() {
 
 		BigDecimal quantidaDeNotas = new BigDecimal(3);
@@ -120,5 +128,15 @@ public class Matricula {
 
 	private void setStatus(StatusAprovacao status) {
 		this.status = status;
+	}
+
+	/**
+	 * Verifica se a nota é MAIOR que 0 e MENOR que 10
+	 * @param nota "Nota do aluno"
+	 */
+	private void checarNota(BigDecimal nota) {
+		if(nota.compareTo(BigDecimal.ZERO)<0 || nota.compareTo(BigDecimal.TEN)>0){
+			throw new IllegalArgumentException();
+		}
 	}
 }
