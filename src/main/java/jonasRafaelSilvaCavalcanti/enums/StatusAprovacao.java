@@ -1,4 +1,4 @@
-package br.ufrn.imd.enums;
+package jonasRafaelSilvaCavalcanti.enums;
 
 public enum StatusAprovacao {
 	REPF,//	Reprovado por Faltas	Reprovado(a) por não atender ao critério de assiduidade (frequência inferior a 75%).

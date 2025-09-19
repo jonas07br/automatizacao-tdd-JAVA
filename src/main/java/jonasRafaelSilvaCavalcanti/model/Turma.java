@@ -1,4 +1,4 @@
-package br.ufrn.imd.model;
+package jonasRafaelSilvaCavalcanti.model;
 
 import java.util.ArrayList;
 import java.util.List;

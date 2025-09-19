@@ -1,8 +1,8 @@
-package br.ufrn.imd.model;
+package jonasRafaelSilvaCavalcanti.model;
 
 import java.math.BigDecimal;
 
-import br.ufrn.imd.enums.StatusAprovacao;
+import jonasRafaelSilvaCavalcanti.enums.StatusAprovacao;
 
 public class Matricula {
 	private final Discente discente;

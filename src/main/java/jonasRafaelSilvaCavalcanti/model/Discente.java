@@ -1,4 +1,4 @@
-package br.ufrn.imd.model;
+package jonasRafaelSilvaCavalcanti.model;
 
 public class Discente {
 	private String nome;
