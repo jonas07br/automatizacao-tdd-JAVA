@@ -79,7 +79,7 @@ public class Matricula {
 		BigDecimal notaMinima = new BigDecimal(4);
 
 		//Indica se possui media maior ou igual a 6
-		boolean acimaDaMedia;
+		boolean possuiMediaMinima;
 
 		//Indica se possui media para reposicao(>=3 e <6)
 		boolean possuiMediaParaReposicao;
@@ -96,7 +96,7 @@ public class Matricula {
 				.add(this.nota3))
 				.divide(quantidaDeNotas,RoundingMode.HALF_UP);
 
-		acimaDaMedia = media.compareTo(new BigDecimal(6)) >= 0;
+		possuiMediaMinima = media.compareTo(new BigDecimal(6)) >= 0;
 
 		possuiMediaParaReposicao = media.compareTo(new BigDecimal(6)) < 0 && media.compareTo(new BigDecimal(3)) >= 0;
 
@@ -104,14 +104,14 @@ public class Matricula {
 				this.nota2.compareTo(notaMinima)>=0 &&
 				this.nota3.compareTo(notaMinima)>=0;
 
-		possuiFrequenciaMinima = this.getFrequencia()>75;
+		possuiFrequenciaMinima = this.getFrequencia()>=75;
 
 		//Filtro para atribuicao de Status
-		if(acimaDaMedia && possuiNotasMinimas && possuiFrequenciaMinima) {
+		if(possuiMediaMinima && possuiNotasMinimas && possuiFrequenciaMinima) {
 			this.setStatus(StatusAprovacao.APR);
-		}else if(possuiFrequenciaMinima && possuiMediaParaReposicao) {
+		}else if(possuiFrequenciaMinima && (possuiMediaParaReposicao || (!possuiNotasMinimas && possuiMediaMinima))) {
 			this.setStatus(StatusAprovacao.REC);
-		}else if(!(acimaDaMedia || possuiMediaParaReposicao)){
+		}else if(!(possuiMediaMinima || possuiMediaParaReposicao)){
 			if(possuiFrequenciaMinima){
 				this.setStatus(StatusAprovacao.REP);
 			}else{
