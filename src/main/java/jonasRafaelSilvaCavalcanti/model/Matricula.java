@@ -57,6 +57,9 @@ public class Matricula {
 	}
 
 	public void cadastrarFrequencia(Integer frequencia) {
+		if(frequencia>100 || frequencia<0){
+			throw new IllegalArgumentException();
+		}
 		this.frequencia = frequencia;
 	}
 
