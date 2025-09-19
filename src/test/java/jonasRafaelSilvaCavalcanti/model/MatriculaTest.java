@@ -63,12 +63,25 @@ class MatriculaTest {
             "7.0f,1.0f,100.0f",
             "10.0f,-10.0f,10.0f",
     })
-    void deveLancarExcecao(float nota1, float nota2, float nota3) {
+    void deveLancarExcecaoCasoNotaInvalida(float nota1, float nota2, float nota3) {
         Matricula matricula = new Matricula(discente,turma);
         assertThrows(IllegalArgumentException.class, () -> {
             matricula.cadastrarNota1(new BigDecimal(nota1));
             matricula.cadastrarNota2(new BigDecimal(nota2));
             matricula.cadastrarNota3(new BigDecimal(nota3));
+        });
+
+    }
+    @ParameterizedTest
+    @CsvSource(value = {
+            "101",
+            "-10",
+            "400"
+    })
+    void deveLancarExcecaoCasoFrequenciaInvalida(int frequencia) {
+        Matricula matricula = new Matricula(discente,turma);
+        assertThrows(IllegalArgumentException.class, () -> {
+            matricula.cadastrarFrequencia(frequencia);
         });
 
     }
