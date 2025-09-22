@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>jonasRafaelSilvaCavalcanti</groupId>
-  <artifactId>projeto-testes</artifactId>
+  <artifactId>automatizacao_tdd</artifactId>
   <version>1.0-SNAPSHOT</version>
 
   <name>automatizacao_tdd</name>
